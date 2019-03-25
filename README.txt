@@ -7,9 +7,10 @@ st       a11x1 + a12x2 + … + anxn ⊗ b1
          am1x1 + am2x2 + … + amnxn ⊗ bm
 xj ≥ 0, (j = 1, …,n)
 
-and outputting the same problem in a form
+and outputting the same problem in matrix form:
 
-min(max) c x
-s.t.
- 0
-T c x
+min(max) c^Tx
+s.t.  Ax⊗b
+x≥0
+
+> Coded in Python 3
