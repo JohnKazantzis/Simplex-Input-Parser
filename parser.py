@@ -3,6 +3,49 @@
 import re
 import sys
 
+def inputtingData(fileLines):
+    #Storing Min or max
+    minMax = re.findall("max|min",fileLines[0])
+
+    #Storing the z Coefficients
+    zCoef = []
+    j=0
+    fileLines[0] = re.sub("\A\s*min|max","",fileLines[0])
+    zCoef = re.findall("\s*[+-]*\s*\d*[a-zA-Z]",fileLines[0])
+    #print(zCoef)
+    for x in zCoef:
+        zCoef[j] = re.sub("x","",zCoef[j])
+        zCoef[j] = re.sub("\s","",zCoef[j])
+        if zCoef[j] == "":
+            zCoef[j] = re.sub("","1",zCoef[j])
+        elif zCoef[j] == "+":
+            zCoef[j] = re.sub("[+]","+1",zCoef[j])
+        elif zCoef[j] == "-":
+            zCoef[j] = re.sub("[-]","-1",zCoef[j])
+        j = j + 1
+    print(zCoef)
+
+    #Storing the A
+    aCoef = []
+    j=0
+    for y in range(1,len(fileLines)-1):
+        aCoef.append(re.findall("\s*[+-]*\s*\d*[a-zA-Z]",fileLines[y]))
+        #print(aCoef)
+        for x in aCoef[y-1]:
+            #print(aCoef[y-1][j])
+            aCoef[y-1][j] = re.sub("x","",aCoef[y-1][j])
+            aCoef[y-1][j] = re.sub("\s","",aCoef[y-1][j])
+            if aCoef[y-1][j] == "":
+                aCoef[y-1][j] = re.sub("","1",aCoef[y-1][j])
+            elif aCoef[y-1][j] == "+":
+                aCoef[y-1][j] = re.sub("[+]","+1",aCoef[y-1][j])
+            elif aCoef[y-1][j] == "-":
+                aCoef[y-1][j] = re.sub("[-]","-1",aCoef[y-1][j])
+            j = j + 1
+        j = 0
+    print(aCoef)
+
+
 def inputCheck(fileLines):
     numOfVars = 0
     numOfSigns = 0
@@ -87,8 +130,10 @@ def main():
     for line in input.splitlines():
         fileLines.append(line)
 
-    #Calling the fuction responsible for checking the input
+    #Calling the function responsible for checking the input
     inputCheck(fileLines)
+    #Calling the function responsible for storing the data
+    inputtingData(fileLines)
 
     print("Ok!")
 
