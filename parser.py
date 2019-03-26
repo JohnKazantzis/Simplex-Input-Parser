@@ -45,6 +45,16 @@ def inputtingData(fileLines):
         j = 0
     print(aCoef)
 
+    #Storing Eqin
+    Eqin = []
+    for x in range(1,len(fileLines)-1):
+        if re.search("≥",fileLines[x]) != None:
+            Eqin.append(1)
+        elif re.search("≤",fileLines[x]) != None:
+            Eqin.append(-1)
+        else:
+            Eqin.append(0)
+    print(Eqin)
 
 def inputCheck(fileLines):
     numOfVars = 0
