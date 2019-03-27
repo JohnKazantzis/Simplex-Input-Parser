@@ -6,44 +6,50 @@ import sys
 def inputtingData(fileLines):
     #Storing Min or max
     minMax = re.findall("max|min",fileLines[0])
+    print(minMax)
+    if minMax[0] == "max":
+        minMax = 1
+    else:
+        minMax = -1
+    print(minMax)
 
-    #Storing the z Coefficients
-    zCoef = []
+    #Storing c
+    c = []
     j=0
     fileLines[0] = re.sub("\A\s*min|max","",fileLines[0])
-    zCoef = re.findall("\s*[+-]*\s*\d*[a-zA-Z]",fileLines[0])
+    c = re.findall("\s*[+-]*\s*\d*[a-zA-Z]",fileLines[0])
     #print(zCoef)
-    for x in zCoef:
-        zCoef[j] = re.sub("x","",zCoef[j])
-        zCoef[j] = re.sub("\s","",zCoef[j])
-        if zCoef[j] == "":
-            zCoef[j] = re.sub("","1",zCoef[j])
-        elif zCoef[j] == "+":
-            zCoef[j] = re.sub("[+]","+1",zCoef[j])
-        elif zCoef[j] == "-":
-            zCoef[j] = re.sub("[-]","-1",zCoef[j])
+    for x in c:
+        c[j] = re.sub("x","",c[j])
+        c[j] = re.sub("\s","",c[j])
+        if c[j] == "":
+            c[j] = re.sub("","1",c[j])
+        elif c[j] == "+":
+            c[j] = re.sub("[+]","+1",c[j])
+        elif c[j] == "-":
+            c[j] = re.sub("[-]","-1",c[j])
         j = j + 1
-    print(zCoef)
+    print(c)
 
     #Storing the A
-    aCoef = []
+    A = []
     j=0
     for y in range(1,len(fileLines)-1):
-        aCoef.append(re.findall("\s*[+-]*\s*\d*[a-zA-Z]",fileLines[y]))
+        A.append(re.findall("\s*[+-]*\s*\d*[a-zA-Z]",fileLines[y]))
         #print(aCoef)
-        for x in aCoef[y-1]:
+        for x in A[y-1]:
             #print(aCoef[y-1][j])
-            aCoef[y-1][j] = re.sub("x","",aCoef[y-1][j])
-            aCoef[y-1][j] = re.sub("\s","",aCoef[y-1][j])
-            if aCoef[y-1][j] == "":
-                aCoef[y-1][j] = re.sub("","1",aCoef[y-1][j])
-            elif aCoef[y-1][j] == "+":
-                aCoef[y-1][j] = re.sub("[+]","+1",aCoef[y-1][j])
-            elif aCoef[y-1][j] == "-":
-                aCoef[y-1][j] = re.sub("[-]","-1",aCoef[y-1][j])
+            A[y-1][j] = re.sub("x","",A[y-1][j])
+            A[y-1][j] = re.sub("\s","",A[y-1][j])
+            if A[y-1][j] == "":
+                A[y-1][j] = re.sub("","1",A[y-1][j])
+            elif A[y-1][j] == "+":
+                A[y-1][j] = re.sub("[+]","+1",A[y-1][j])
+            elif A[y-1][j] == "-":
+                A[y-1][j] = re.sub("[-]","-1",A[y-1][j])
             j = j + 1
         j = 0
-    print(aCoef)
+    print(A)
 
     #Storing Eqin
     Eqin = []
@@ -55,6 +61,13 @@ def inputtingData(fileLines):
         else:
             Eqin.append(0)
     print(Eqin)
+
+    #Storing b
+    b = []
+    for x in range(1,len(fileLines)-1):
+        b.append(re.findall("[+-]*\d\d*\s*\Z",fileLines[x]))
+
+    print(b)
 
 def inputCheck(fileLines):
     numOfVars = 0
