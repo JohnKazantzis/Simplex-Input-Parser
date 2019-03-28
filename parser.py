@@ -3,15 +3,38 @@
 import re
 import sys
 
+def outputtingData(minMax, A, c, b, Eqin):
+    outFile = open("output.txt","w")
+
+    #Writing min/max
+    if minMax == 1:
+        outFile.write("max ")
+    else:
+        outFile.write("min ")
+    outFile.write("c = ")
+    outFile.write(str(c))
+
+    #Writing A
+    outFile.write("\nA = \n\t")
+    for x in range(0,len(A)):
+        outFile.write(str(A[x]))
+        outFile.write("\n\t")
+
+    #Writing b
+    outFile.write("\nb = \n\t")
+    for x in range(0,len(b)):
+        outFile.write(str(b[x]))
+        outFile.write("\n\t")
+
+    outFile.close()
+
 def inputtingData(fileLines):
     #Storing Min or max
     minMax = re.findall("max|min",fileLines[0])
-    print(minMax)
     if minMax[0] == "max":
         minMax = 1
     else:
         minMax = -1
-    print(minMax)
 
     #Storing c
     c = []
@@ -29,7 +52,6 @@ def inputtingData(fileLines):
         elif c[j] == "-":
             c[j] = re.sub("[-]","-1",c[j])
         j = j + 1
-    print(c)
 
     #Storing the A
     A = []
@@ -49,7 +71,6 @@ def inputtingData(fileLines):
                 A[y-1][j] = re.sub("[-]","-1",A[y-1][j])
             j = j + 1
         j = 0
-    print(A)
 
     #Storing Eqin
     Eqin = []
@@ -60,14 +81,13 @@ def inputtingData(fileLines):
             Eqin.append(-1)
         else:
             Eqin.append(0)
-    print(Eqin)
 
     #Storing b
     b = []
     for x in range(1,len(fileLines)-1):
         b.append(re.findall("[+-]*\d\d*\s*\Z",fileLines[x]))
 
-    print(b)
+    return minMax, A, c, b, Eqin
 
 def inputCheck(fileLines):
     numOfVars = 0
@@ -156,7 +176,9 @@ def main():
     #Calling the function responsible for checking the input
     inputCheck(fileLines)
     #Calling the function responsible for storing the data
-    inputtingData(fileLines)
+    minMax, A, c, b, Eqin = inputtingData(fileLines)
+    #Calling the function responsible for creating the output file
+    outputtingData(minMax, A, c, b, Eqin)
 
     print("Ok!")
 
