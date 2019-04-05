@@ -157,8 +157,8 @@ def main():
     fileLines = []
 
     if len(sys.argv) != 2:
-        print("Use python3 ex1.py -h or python3 ex2.py --help")
-        print("to learn how run the script")
+        print("Use python3 parser.py -h or python3 ex2.py --help")
+        print("to learn how to run the script")
         exit(0)
 
     if sys.argv[1]== "-h" or sys.argv[1]== "--help":
@@ -180,7 +180,7 @@ def main():
     #Calling the function responsible for creating the output file
     outputtingData(minMax, A, c, b, Eqin)
 
-    print("Ok!")
+    print("The problem was converted successfully. Please check\nthe output.txt")
 
 if __name__ == '__main__':
     main()
