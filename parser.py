@@ -157,12 +157,12 @@ def main():
     fileLines = []
 
     if len(sys.argv) != 2:
-        print("Use python3 parser.py -h or python3 ex2.py --help")
+        print("Use python3 parser.py -h or python3 parser.py --help")
         print("to learn how to run the script")
         exit(0)
 
     if sys.argv[1]== "-h" or sys.argv[1]== "--help":
-        print("Usage: python3 ex1.py [Input File Name]")
+        print("Usage: python3 parser.py [Input File Name]")
         exit(0)
 
     #Opening text file
