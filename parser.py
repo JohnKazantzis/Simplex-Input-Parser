@@ -26,6 +26,12 @@ def outputtingData(minMax, A, c, b, Eqin):
         outFile.write(str(b[x]))
         outFile.write("\n\t")
 
+    #Writting Eqin
+    outFile.write("\nEqin = \n\t")
+    for x in range(0,len(Eqin)):
+        outFile.write("[" + str(Eqin[x]) + "]")
+        outFile.write("\n\t")
+
     outFile.close()
 
 def inputtingData(fileLines):
